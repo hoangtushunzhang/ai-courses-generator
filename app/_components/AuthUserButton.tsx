@@ -1,15 +1,31 @@
+'use client'
 import { Button } from '@/components/ui/button'
+import { UserButton, useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
 
 const AuthUserButton = () => {
+
+  const { isSignedIn } = useUser();
+
   return (
     <div>
-      <Link href={'/sign-in'}>
-      <Button className="bg-indigo-600 hover:bg-indigo-600/80">
-      Sign In
-      </Button>
-      </Link>
+      {isSignedIn ? (
+        <div className='flex items-center'>
+          <Link href={'/dashboard'} className='mr-3'>
+            <Button className='bg-myThird hover:bg-myThird/80'>
+              Dashboard
+            </Button>
+          </Link>
+          <UserButton />
+        </div>
+      ) : (
+        <Link href={'/sign-in'}>
+          <Button className="bg-indigo-600 hover:bg-indigo-600/80">
+            Sign In
+          </Button>
+        </Link>)
+      }
     </div>
   )
 }

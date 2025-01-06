@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local"
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const myFontRegular = localFont({
   src: '/fonts/BeVietnamPro-Regular.ttf',
@@ -20,12 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body
-        className={`${myFontRegular} antialiased`}
-      >
+        className={`${myFontRegular} antialiased`}>
         {children}
       </body>
     </html>
+    </ClerkProvider>
   );
 }
