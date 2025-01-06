@@ -27,12 +27,12 @@ export const CategoryItems = [
     {
         label: 'Finance',
         value: 'finance',
-        href: 'finance',
+        href: '/finance',
     },
     {
         label: 'Accounting',
         value: 'accounting',
-        href: 'accounting',
+        href: '/accounting',
     },
 ]
 
@@ -73,5 +73,47 @@ export const SideBarDashBoardItems = [
         value: 'upgrade',
         link: '/dashboard/upgrade',
         icon: ShieldPlusIcon,
+    },
+]
+
+export const LanguageItems = [
+    {
+        label: 'Vietnamese', value: 'vn',
+    },
+    {
+        label: 'English', value: 'en'
+    },
+]
+
+export const LevelItems = [
+    {
+        label: 'Beginner', value: 'beginner',
+    },
+    {
+        label: 'Intermediate', value: 'intermediate',
+    },
+    {
+        label: 'Advanced', value: 'advanced',
+    },
+]
+
+export const DurationItems = [
+    {
+        label: '1 Hour', value: '1 hour',
+    },
+    {
+        label: '2 Hours', value: '2 hours',
+    },
+    {
+        label: 'More than 3 hours', value: 'more than 3 hours',
+    },
+]
+
+export const VideoItems = [
+    {
+        label: 'Yes', value: 'yes',
+    },
+    {
+        label: 'No', value: 'no',
     },
 ]

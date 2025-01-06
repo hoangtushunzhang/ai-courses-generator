@@ -6,9 +6,13 @@ export default function DashBoardLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <>
-            <SideBar />
-            {children}
-        </>
+        <div>
+            <div className="hidden md:block md:w-64">
+                <SideBar />
+            </div>
+            <div className="md:ml-64 p-10">
+                {children}
+            </div>
+        </div>
     );
 }
