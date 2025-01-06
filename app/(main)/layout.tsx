@@ -8,10 +8,12 @@ export default function MainLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <>
-            <Header />
+        <div className="">
+            <div className="sticky top-0 z-50 w-full"><Header /></div>
             {children}
-            <Footer />
-        </>
+            <div className="p-10 mt-20 bg-gray-50">
+                <Footer />
+            </div>
+        </div>
     );
 }
