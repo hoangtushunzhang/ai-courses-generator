@@ -20,11 +20,18 @@ const AuthUserButton = () => {
           <UserButton />
         </div>
       ) : (
-        <Link href={'/sign-in'}>
-          <Button className="bg-indigo-600 hover:bg-indigo-600/80">
-            Sign In
-          </Button>
-        </Link>)
+        <div className='flex items-center'>
+          <Link href={'/dashboard'} className='mr-3' >
+            <Button className='bg-myPrimary hover:bg-myPrimary/80'>
+              Get Started
+            </Button>
+          </Link>
+          <Link href={'/sign-in'}>
+            <Button className="bg-indigo-600 hover:bg-indigo-600/80">
+              Sign In
+            </Button>
+          </Link>
+        </div>)
       }
     </div>
   )
