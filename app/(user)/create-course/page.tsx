@@ -1,7 +1,8 @@
 'use client';
+import uuid4 from 'uuid4'
 import { FormSchema } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import React, { useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -26,9 +27,17 @@ import { CategoryItems, DurationItems, LanguageItems, LevelItems, VideoItems } f
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import HeaderContent from '../_components/HeaderContent';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { createCourseContent } from '../actions/createCourse';
 
 
 const CreateCoursePage = () => {
+
+    const [isPending, startTrasition] = useTransition();
+    const user = useUser();
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -43,8 +52,28 @@ const CreateCoursePage = () => {
         },
     });
 
-    function onSubmit(UserInput: z.infer<typeof FormSchema>) {
-        console.log(UserInput)
+    function onSubmit(userInput: z.infer<typeof FormSchema>) {
+        startTrasition(async () => {
+            if (!user) return;
+
+            const courseID = uuid4();
+            const createdBy = user?.primaryEmailAddress?.emailAddress || 'no email';
+            const userName = user?.fullName || 'no name';
+            const userProfileImage = user?.imageUrl || '/.placeholder.png';
+
+            try {
+                await createCourseContent({
+                    ...userInput,
+                    courseID,
+                    createdBy,
+                    userName,
+                    userProfileImage,
+                });
+                router.push(`/create-course/${courseID}`)
+            } catch (error) {
+                console.error("Failed to create course", error);
+            }
+        })
     }
 
     return (
@@ -248,7 +277,9 @@ const CreateCoursePage = () => {
                             )}
                         />
 
-                        <Button type="submit" className='bg-myPrimary hover:bg-myPrimary/80'>Submit</Button>
+                        <Button type="submit" className='bg-myPrimary hover:bg-myPrimary/80 '>
+                            {isPending ? 'Creating...' : 'Create Course Layout'}
+                        </Button>
                     </form>
                 </Form>
             </div>
