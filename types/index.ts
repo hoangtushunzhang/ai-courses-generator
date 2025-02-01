@@ -25,3 +25,40 @@ export const FormSchema = z.object({
         message: 'Please select a number of chapters',
     })
 })
+
+
+// Course Type on database
+
+export type CourseOutputByAI = {
+    courseName: string;
+    description: string;
+    chapters: CourseOutputChapter;
+    category: string;
+    topic: string;
+    level: string;
+    totalDuration: string;
+    numOfChapters: number;
+}
+
+export type CourseOutputChapter = {
+    chapterName: string;
+    about: string;
+    duration: string;
+}
+
+export type Course = {
+    id: number;
+    courseId: string;
+    language: string;
+    category: string;
+    topic: string;
+    level: string;
+    video: string;
+    courseOutputByAI: CourseOutputByAI;
+    createBy: string;
+    useName: string;
+    useProfileImage: string;
+    courseBanner: string;
+    publish: boolean;
+    createAt: Date;
+}
